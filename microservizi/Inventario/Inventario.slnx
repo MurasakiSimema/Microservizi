@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="Inventario/Inventario.csproj" />
+  <Project Path="Inventario.Repository/Inventario.Repository.csproj" Id="82f86c79-5e51-42d3-9f2e-0bdf3e1b7c0b" />
+</Solution>

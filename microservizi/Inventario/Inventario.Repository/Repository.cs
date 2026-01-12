@@ -88,6 +88,10 @@ namespace Inventario.Repository
             Libro? libro = await ReadLibroAsync(id, cancellationToken);
             if (libro == null)
                 return null;
+
+            if (libro.QuantitaDisponibile + quantita < 0)
+                throw new ArgumentOutOfRangeException("La quantita totale non puo essere negativa");
+
             libro.QuantitaDisponibile += quantita;
             inventarioDbContext.Articoli.Update(libro);
 
@@ -122,22 +126,26 @@ namespace Inventario.Repository
                 .AsNoTracking()
                 .FirstOrDefaultAsync(f => f.Id == id, cancellationToken);
         }
-        public async Task<List<Fornitore>> GetAllFornitoriAsync(CancellationToken cancellationToken = default)
+        public async Task<List<Fornitore>> ReadAllFornitoriAsync(CancellationToken cancellationToken = default)
         {
             return await inventarioDbContext.Fornitori
                 .AsNoTracking()
                 .ToListAsync(cancellationToken);
         }
         // Update Fornitore
-        public async Task UpdateFornitoreAsync(int id, string nome, string indirizzo, string telefono, string email, CancellationToken cancellationToken = default)
+        public async Task<Fornitore?> UpdateFornitoreAsync(int id, string nome, string indirizzo, string telefono, string email, CancellationToken cancellationToken = default)
         {
             Fornitore? fornitore = await ReadFornitoreAsync(id, cancellationToken);
-            if (fornitore == null) return;
+            if (fornitore == null) 
+                return null;
+            
             fornitore.Nome = nome;
             fornitore.Indirizzo = indirizzo;
             fornitore.Telefono = telefono;
             fornitore.Email = email;
             inventarioDbContext.Fornitori.Update(fornitore);
+
+            return fornitore;
         }
         // Delete Fornitore
         public async Task DeleteFornitoreAsync(int id, CancellationToken cancellationToken = default)

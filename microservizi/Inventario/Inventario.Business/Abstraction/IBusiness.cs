@@ -22,7 +22,7 @@ public interface IBusiness
     Task CreateFornitoreAsync(string nome, string indirizzo, string telefono, string email, CancellationToken cancellationToken = default);
     // Read
     Task<FornitoreDto?> ReadFornitoreAsync(int id, CancellationToken cancellationToken = default);
-    Task<List<FornitoreDto>> GetAllFornitoriAsync(CancellationToken cancellationToken = default);
+    Task<List<FornitoreDto>> ReadAllFornitoriAsync(CancellationToken cancellationToken = default);
     // Update
     Task<FornitoreDto?> UpdateFornitoreAsync(int id, string nome, string indirizzo, string telefono, string email, CancellationToken cancellationToken = default);
     // Delete

@@ -97,7 +97,7 @@ public class Business(IRepository repository, ILogger<Business> logger) : IBusin
 
         return fornitore.MapToDto();
     }
-    public async Task<List<FornitoreDto>> GetAllFornitoriAsync(CancellationToken cancellationToken = default)
+    public async Task<List<FornitoreDto>> ReadAllFornitoriAsync(CancellationToken cancellationToken = default)
     {
         var fornitori = await repository.ReadAllFornitoriAsync(cancellationToken);
 

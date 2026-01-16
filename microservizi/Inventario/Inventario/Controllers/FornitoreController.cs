@@ -58,14 +58,15 @@ public class FornitoreController : ControllerBase
         }
     }
 
-    [HttpGet(Name = "GetAllFornitori")]
-    public async Task<ActionResult<List<FornitoreDto>>> GetAllFornitori()
+    [HttpGet(Name = "ReadAllFornitoriAsync")]
+    public async Task<ActionResult<List<FornitoreDto>>> ReadAllFornitoriAsync()
     {
         try
         {
-            var fornitori = await _business.GetAllFornitoriAsync();
+            var fornitori = await _business.ReadAllFornitoriAsync();
             if (fornitori == null || !fornitori.Any())
                 return new JsonResult(new { message = "Nessun fornitore trovato" }) { StatusCode = 404 };
+
             return new JsonResult(fornitori) { StatusCode = 200 };
         }
         catch (Exception e)

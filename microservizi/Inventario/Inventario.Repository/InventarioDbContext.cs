@@ -19,7 +19,7 @@ namespace Inventario.Repository
                 articolo.Property(e => e.Autore).HasMaxLength(100); // Proprietà Autore
                 articolo.Property(e => e.Prezzo).IsRequired().HasColumnType("DECIMAL(10, 2)"); // Proprietà Prezzo
                 articolo.Property(e => e.QuantitaDisponibile).IsRequired(); // Proprietà Quantità
-                articolo.Property(e => e.DataInserimento).IsRequired().HasDefaultValueSql("GETUTCDATE()"); // Proprietà DataInserimento
+                articolo.Property(e => e.DataInserimento).IsRequired().HasDefaultValueSql("NOW()"); // Proprietà DataInserimento
                 articolo.HasOne(e => e.Fornitore) // Un articolo ha un solo fornitore
                       .WithMany(f => f.Libri) // Un fornitore può avere più libri
                       .HasForeignKey(e => e.Fk_fornitore) // Chiave esterna

@@ -35,7 +35,7 @@ public class FornitoreController : ControllerBase
         catch (Exception e)
         {
             _logger.LogError(e, "Errore durante la creazione del fornitore");
-            return new JsonResult(new { message = "Interal server error" }) { StatusCode = 500 };
+            return new JsonResult(new { message = "Interal server error", error = e }) { StatusCode = 500 };
         }
     }
 

@@ -17,8 +17,8 @@ builder.WebHost.ConfigureKestrel(options =>
 builder.Services.AddSwaggerGen();
 builder.Services.AddEndpointsApiExplorer();
 
-string connectionString = "Server=mssql-server;Database=Inventario;User Id=sa;Password=password123;Encrypt=False";
-builder.Services.AddDbContext<InventarioDbContext>(options => options.UseSqlServer(connectionString, b => b.MigrationsAssembly("Inventario")));
+string connectionString = "name=ConnectionStrings:InventarioDbContext";
+builder.Services.AddDbContext<InventarioDbContext>(options => options.UseNpgsql(connectionString, b => b.MigrationsAssembly("Inventario")));
 
 builder.Services.AddScoped<IRepository, Repository>();
 builder.Services.AddScoped<IBusiness, Business>();

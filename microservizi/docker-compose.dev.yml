@@ -1,0 +1,18 @@
+networks:
+  app:
+    driver: bridge
+
+volumes:
+  db:
+
+services:
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_PASSWORD: password123
+    volumes:
+      - db:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    networks:
+      - app
